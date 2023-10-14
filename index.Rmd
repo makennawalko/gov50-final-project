@@ -13,7 +13,7 @@ data2 <- read_csv("data/marvel-wikia-data.csv")
 data2
 ```
 
-## Project Thoughts
+## Project Thoughts 
 
 I'm not quite quite sure what I want to do my project on yet. I think I could potentially be interested in exploring data related to female representation, but I'm not sure if I want to explore it through the lens of media, sports, politics, or something else.  
 
