@@ -8,7 +8,7 @@ output:
 ---
 
 ```{r}
-library(tidyverse)
+library(tidyverse) 
 data2 <- read_csv("data/marvel-wikia-data.csv")
 data2
 ```
