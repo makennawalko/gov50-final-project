@@ -13,10 +13,6 @@ data2 <- read_csv("data/marvel-wikia-data.csv")
 data2
 ```
 
-## Project Thoughts 
-
-I'm not quite quite sure what I want to do my project on yet. I think I could potentially be interested in exploring data related to female representation, but I'm not sure if I want to explore it through the lens of media, sports, politics, or something else.  
-
 ## Project Proposal
 
   For this project, I am planning on using Neil Paine’s data set on diversity and representation in Marvel comics to research the question: Are characters of marginalized identities (members of the LGBT+ community, women) more likely to be portrayed as villains in Marvel comics? Ideally, I would also like to manually add data about characters’ racial background as well (but I’m not sure how to edit a data frame yet so this is tbd). 
