@@ -6,7 +6,7 @@ output:
   distill::distill_article:
     self_contained: false
 ---
-
+  
 ```{r}
 library(tidyverse) 
 data2 <- read_csv("data/marvel-wikia-data.csv")
