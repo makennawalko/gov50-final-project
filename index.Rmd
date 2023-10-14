@@ -7,8 +7,18 @@ output:
     self_contained: false
 ---
 
+```{r}
+library(tidyverse)
+data2 <- read_csv("data/marvel-wikia-data.csv")
+data2
+```
 
-
-## Project thoughts
+## Project Thoughts
 
 I'm not quite quite sure what I want to do my project on yet. I think I could potentially be interested in exploring data related to female representation, but I'm not sure if I want to explore it through the lens of media, sports, politics, or something else.  
+
+## Project Proposal
+
+  For this project, I am planning on using Neil Paine’s data set on diversity and representation in Marvel comics to research the question: Are characters of marginalized identities (members of the LGBT+ community, women) more likely to be portrayed as villains in Marvel comics? Ideally, I would also like to manually add data about characters’ racial background as well (but I’m not sure how to edit a data frame yet so this is tbd). 
+  I hypothesize that overall, minority characters will be more likely to be portrayed as villains. Marvel Comics– and thus the characters from this data set— date back to 1939, a period when racism was still rampant and the LGBT+ community was significantly more ostracized. A natural offshoot of this racism and homophobia in society would be negative representation in the media, including in comic books. However, I hypothesize that if I examine LGBT+ characters, POC characters, and female characters independently, I will find that female characters are actually more likely to be portrayed in a positive light. Sexist social ideals in the early and mid-1900s generally painted women as innocent and pure, so it makes sense that they would be more closely identified with the “good side” in comic books. Additionally, most female characters in these early comic books were probably love interests for the main heroes, so again, they were probably on the side of the “good guys.” 
+  The explanatory variable that we are examining is the identity of the characters (either “white, cis, straight male” or “marginalized identity [LGBT+, female, POC]” → could potentially explore these identifiers independently as well). These groupings can easily be created based on identifiers in the data set: SEX (female/male) and GSM (gender or sexual minority). As I said above, new data would need to be manually entered to create a variable for race. The outcome variable in this study is whether characters are portrayed as a hero or villain (or neither). In this data set, each character is designated an alignment (ALIGN): “Good Character,” “Bad Character,” or “Neutral Character.” This will make it easy to identify the outcome of how they were portrayed. If my research should yield a high correlation between characters being of a marginalized background and being labeled “Bad Character” compared to white cis male characters, than my hypothesis will be proven correct. If the opposite is true and white, cis, straight male characters are more closely correlated with being a “Bad Character” than characters from marginalized backgrounds, my hypothesis will be disproven. Ideally, I would like to break down these comparisons so I can see the individual effect of characters being POC vs female vs LGBT+ on their portrayal as well. 
