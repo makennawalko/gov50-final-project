@@ -6,12 +6,41 @@ output:
   distill::distill_article:
     self_contained: false
 ---
-  
 ```{r}
 library(tidyverse) 
+library(ggplot2)
 data2 <- read_csv("data/marvel-wikia-data.csv")
 data2
 ```
+  
+```{r}
+data2 <- data2 |>
+  mutate(lgbt_character = case_when(GSM == "Bisexual Characters" ~ 1,
+                                    GSM == "Homosexual Characters" ~ 1,
+                                    GSM == "Pansexual Characters" ~ 1,
+                                    GSM == "Transgender Characters" ~ 1,
+                                    TRUE ~ 0),
+         female_character = if_else(SEX == "Female Characters", 1, 0),
+        minority_character = (female_character == 1 | lgbt_character == 1))
+
+minority_graph <- data2 |>
+  group_by(ALIGN, minority_character) |>
+  summarize(n = n()) |>
+  ggplot(mapping = aes(x = ALIGN, y = n)) +
+  geom_col(aes(fill = minority_character), position = "dodge") +
+  labs(title = "Marvel Comic Book Characters By Moral Alignment and Identity",
+       x = "Alignment",
+       y = "Number of Characters",
+       fill = "Minority Affiliation") +
+  scale_fill_discrete(name = "Minority Affiliation", labels = c("Minority (LGBT+ or Female)", "No Minority Affiliation")) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))
+
+minority_graph
+```
+```{r}
+
+```
+
 
 ## Project Proposal
 
