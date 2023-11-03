@@ -32,13 +32,41 @@ minority_graph <- data2 |>
        x = "Alignment",
        y = "Number of Characters",
        fill = "Minority Affiliation") +
-  scale_fill_discrete(name = "Minority Affiliation", labels = c("Minority (LGBT+ or Female)", "No Minority Affiliation")) +
+  scale_fill_discrete(name = "Minority Affiliation", labels = c("No Minority Affiliation", "Minority (LGBT+ or Female)")) +
   scale_x_discrete(guide = guide_axis(n.dodge=2))
 
 minority_graph
 ```
 ```{r}
 
+female_graph <- data2 |>
+  group_by(ALIGN, SEX) |>
+  summarize(n = n()) |>
+  ggplot(mapping = aes(x = ALIGN, y = n)) +
+  geom_col(aes(fill = SEX), position = "dodge") +
+  labs(title = "Marvel Comic Book Characters By Moral Alignment and Gender Identity",
+       x = "Alignment",
+       y = "Number of Characters",
+       fill = "Minority Affiliation") +
+    scale_x_discrete(guide = guide_axis(n.dodge=2))
+
+female_graph
+```
+```{r}
+
+lgbt_graph <- data2 |>
+  drop_na(GSM) |>
+  group_by(ALIGN, GSM) |>
+  summarize(n = n()) |>
+  ggplot(mapping = aes(x = ALIGN, y = n)) +
+  geom_col(aes(fill = GSM), position = "dodge") +
+  labs(title = "Moral Alignment of LGBT+ Marvel Comic Book Characters",
+       x = "Alignment",
+       y = "Number of Characters",
+       fill = "LGBT+ Identity") +
+    scale_x_discrete(guide = guide_axis(n.dodge=2))
+
+lgbt_graph
 ```
 
 
