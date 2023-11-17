@@ -68,7 +68,30 @@ lgbt_graph <- data2 |>
 
 lgbt_graph
 ```
-## Analysis
+## Correlation
+
+```{r}
+
+data2 <- data2 |>
+  drop_na(ALIGN) |>
+  mutate(align_value = case_when(ALIGN == "Good Characters" ~ 2,
+                                    ALIGN == "Neutral Characters" ~ 1,
+                                    ALIGN == "Bad Characters" ~ 0))
+
+cor(data2$minority_character, data2$align_value,
+      use = "pairwise")
+
+cor(data2$female_character, data2$align_value,
+      use = "pairwise")
+
+cor(data2$lgbt_character, data2$align_value)
+```
+
+## Analysis of Correlation
+
+The reported correlation between female identity and moral alignment was 0.19. The reported correlation between LGBT+ identity and moral alignment was 0.06. In general, the correlation between being a minority character and moral alignment was 0.20. This shows that falling into any of the three identity categories was positively associated with being portrayed as a "good" character, although this correlation was much stronger for women and the overall "minority" character category than it was for LGBT+ characters specifically.
+
+## Analysis of Graphs
 
 As the graphs show, female characters are most commonly portrayed as good characters, as was initially predicted. Men, in comparison, are most often portrayed as villains, but they are over-represented in every alignment category. For instance, although female characters are portrayed as good more often than bad and male characters are bad more often than good, there are nonetheless more good male characters than good female characters. A similar trend can be observed across minority versus majority characters in general, probably because the minority category is mostly comprised of female characters and majority by male characters. Still, even when you combine LGBT+ characters and female characters, the collective group is significantly underrepresented compared to straight cis male characters. The final graph examines only the representation of the LGBT+ community, rather than in comparison to straight cis characters, because LGBT+ characters were so grossly underrepresented that when visualized directly alongside non-LGBT+ characters, they were essentially negligible. Within the LGBT+ community, characters across all identities most often appeared as good characters, which contradicted my initial prediction. This differential was so exacerbated that it implied most identities were either good characters, or simply did not appear at all. Out of over 16,000 characters, less than 10 of any identity within the LGBT+ community were "bad characters" and less than 20 were "neutral." Around 60 were "good." This lack of representation for LGBT+ characters across the board reinforces the need for more LGBT+ characters across all alignments. 
 
