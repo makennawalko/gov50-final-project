@@ -1612,19 +1612,57 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>                                    <span class='va'>ALIGN</span> <span class='op'>==</span> <span class='st'>"Neutral Characters"</span> <span class='op'>~</span> <span class='fl'>1</span>,</span>
 <span>                                    <span class='va'>ALIGN</span> <span class='op'>==</span> <span class='st'>"Bad Characters"</span> <span class='op'>~</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data2</span><span class='op'>$</span><span class='va'>minority_character</span>, <span class='va'>data2</span><span class='op'>$</span><span class='va'>align_value</span>,</span>
-<span>      use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>cor_minority</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data2</span><span class='op'>$</span><span class='va'>minority_character</span>, <span class='va'>data2</span><span class='op'>$</span><span class='va'>align_value</span>,</span>
+<span>      use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>cor_minority</span></span></code></pre>
 </div>
 <pre><code>[1] 0.2056731</code></pre>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data2</span><span class='op'>$</span><span class='va'>female_character</span>, <span class='va'>data2</span><span class='op'>$</span><span class='va'>align_value</span>,</span>
-<span>      use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>cor_female</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data2</span><span class='op'>$</span><span class='va'>female_character</span>, <span class='va'>data2</span><span class='op'>$</span><span class='va'>align_value</span>,</span>
+<span>      use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>cor_female</span></span></code></pre>
 </div>
 <pre><code>[1] 0.1998413</code></pre>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data2</span><span class='op'>$</span><span class='va'>lgbt_character</span>, <span class='va'>data2</span><span class='op'>$</span><span class='va'>align_value</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>cor_lgbt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>data2</span><span class='op'>$</span><span class='va'>lgbt_character</span>, <span class='va'>data2</span><span class='op'>$</span><span class='va'>align_value</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>cor_lgbt</span></span></code></pre>
 </div>
 <pre><code>[1] 0.06051561</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>cor_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
+<span>  Variable1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Minority Characters (General)"</span>, <span class='st'>"Female Characters"</span>, <span class='st'>"LGBT+ Characters"</span><span class='op'>)</span>,</span>
+<span>  Correlation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>cor_minority</span>, <span class='va'>cor_female</span>, <span class='va'>cor_lgbt</span><span class='op'>)</span> </span>
+<span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>cor_table</span><span class='op'>)</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Idenity"</span>, <span class='st'>"Correlation With Moral Alignment"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Idenity</th>
+<th style="text-align: right;">Correlation With Moral Alignment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Minority Characters (General)</td>
+<td style="text-align: right;">0.2056731</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Female Characters</td>
+<td style="text-align: right;">0.1998413</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LGBT+ Characters</td>
+<td style="text-align: right;">0.0605156</td>
+</tr>
+</tbody>
+</table>
 </div>
 <h2 id="analysis-of-correlation">Analysis of Correlation</h2>
 <p>The reported correlation between female identity and moral alignment was 0.19. The reported correlation between LGBT+ identity and moral alignment was 0.06. In general, the correlation between being a minority character and moral alignment was 0.20. This shows that falling into any of the three identity categories was positively associated with being portrayed as a “good” character, although this correlation was much stronger for women and the overall “minority” character category than it was for LGBT+ characters specifically.</p>

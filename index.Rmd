@@ -78,14 +78,30 @@ data2 <- data2 |>
                                     ALIGN == "Neutral Characters" ~ 1,
                                     ALIGN == "Bad Characters" ~ 0))
 
-cor(data2$minority_character, data2$align_value,
+cor_minority <- cor(data2$minority_character, data2$align_value,
       use = "pairwise")
 
-cor(data2$female_character, data2$align_value,
+cor_minority
+
+cor_female <- cor(data2$female_character, data2$align_value,
       use = "pairwise")
 
-cor(data2$lgbt_character, data2$align_value)
+cor_female
+
+cor_lgbt <- cor(data2$lgbt_character, data2$align_value)
+
+cor_lgbt
 ```
+
+```{r}
+cor_table <- data.frame(
+  Variable1 = c("Minority Characters (General)", "Female Characters", "LGBT+ Characters"),
+  Correlation = c(cor_minority, cor_female, cor_lgbt) 
+)
+
+knitr::kable((cor_table), col.names = c("Idenity", "Correlation With Moral Alignment"))
+```
+
 
 ## Analysis of Correlation
 
