@@ -102,6 +102,76 @@ cor_table <- data.frame(
 knitr::kable((cor_table), col.names = c("Idenity", "Correlation With Moral Alignment"))
 ```
 
+```{r}
+ate_female <- data2 |>
+  group_by(female_character) |>
+  summarize(align_mean = mean(align_value)) |>
+  pivot_wider(names_from = female_character,
+              values_from = align_mean) |>
+  mutate(ATE = `1` - `0`) |>
+  select(ATE)
+
+ate_female
+
+ate_lgbt <- data2 |>
+  group_by(lgbt_character) |>
+  summarize(align_mean = mean(align_value)) |>
+  pivot_wider(names_from = lgbt_character,
+              values_from = align_mean) |>
+  mutate(ATE = `1` - `0`) |>
+  select(ATE)
+
+ate_lgbt
+```
+
+
+```{r}
+data2 <- data2 |>
+  mutate(
+    pre_1970 = if_else(Year <= 1970, 1, 0)
+  )
+
+fem_fit_ate <- lm(align_value ~ female_character + ALIVE + pre_1970, data = data2)
+summary(fem_fit_ate)
+
+modelsummary::modelsummary(fem_fit_ate,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+```{r}
+lgbt_fit_ate <- lm(align_value ~ lgbt_character + ALIVE + pre_1970, data = data2)
+summary(lgbt_fit_ate)
+
+modelsummary::modelsummary(lgbt_fit_ate,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+```{r}
+data2 |>
+  ggplot(aes(x = lgbt_character, y = align_value)) +
+geom_point (position = "jitter", color = "coral") +
+labs(
+x = "LGBT+ Identifier",
+y = "Alignment",
+title = "Relationship Between LGBT+ Identity Status and Alignment"
+)  +
+geom_smooth(method = "lm", se = FALSE, color = "deeppink3", size = 1.5)
+```
+```{r}
+data2 |>
+  ggplot(aes(x = female_character, y = align_value)) +
+geom_point (position = "jitter", color = "darkslategray3") +
+labs(
+x = "Gender Identifier",
+y = "Alignment",
+title = "Relationship Between Gender Identity and Moral Alignment"
+)  + 
+geom_smooth(method = "lm", se = FALSE, color = "darkslateblue", size = 1.5)
+```
 
 ## Analysis of Correlation
 

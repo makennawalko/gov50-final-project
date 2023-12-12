@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/marvel-wikia-data.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/marvel-wikia-data.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-10-1.png","index_files/figure-html5/unnamed-chunk-11-1.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1473,6 +1473,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="index_files/header-attrs-2.24/header-attrs.js"></script>
+  <script src="index_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="index_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="index_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="index_files/popper-2.6.0/popper.min.js"></script>
   <link href="index_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1664,6 +1666,389 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>ate_female</span> <span class='op'>&lt;-</span> <span class='va'>data2</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>female_character</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>align_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>align_value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>female_character</span>,</span>
+<span>              values_from <span class='op'>=</span> <span class='va'>align_mean</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>ATE <span class='op'>=</span> <span class='va'>`1`</span> <span class='op'>-</span> <span class='va'>`0`</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>ATE</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>ate_female</span></span></code></pre>
+</div>
+<pre><code># A tibble: 1 × 1
+    ATE
+  &lt;dbl&gt;
+1 0.421</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>ate_lgbt</span> <span class='op'>&lt;-</span> <span class='va'>data2</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>lgbt_character</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>align_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>align_value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>lgbt_character</span>,</span>
+<span>              values_from <span class='op'>=</span> <span class='va'>align_mean</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>ATE <span class='op'>=</span> <span class='va'>`1`</span> <span class='op'>-</span> <span class='va'>`0`</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>ATE</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>ate_lgbt</span></span></code></pre>
+</div>
+<pre><code># A tibble: 1 × 1
+    ATE
+  &lt;dbl&gt;
+1 0.722</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data2</span> <span class='op'>&lt;-</span> <span class='va'>data2</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span></span>
+<span>    pre_1970 <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>Year</span> <span class='op'>&lt;=</span> <span class='fl'>1970</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>fem_fit_ate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>align_value</span> <span class='op'>~</span> <span class='va'>female_character</span> <span class='op'>+</span> <span class='va'>ALIVE</span> <span class='op'>+</span> <span class='va'>pre_1970</span>, data <span class='op'>=</span> <span class='va'>data2</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fem_fit_ate</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = align_value ~ female_character + ALIVE + pre_1970, 
+    data = data2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.2299 -0.8323 -0.2299  0.8794  1.4823 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             0.62700    0.01733  36.181  &lt; 2e-16 ***
+female_character        0.39765    0.01879  21.161  &lt; 2e-16 ***
+ALIVELiving Characters  0.20525    0.01836  11.179  &lt; 2e-16 ***
+pre_1970               -0.10931    0.01915  -5.708 1.17e-08 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.8803 on 12297 degrees of freedom
+  (1263 observations deleted due to missingness)
+Multiple R-squared:  0.05308,   Adjusted R-squared:  0.05285 
+F-statistic: 229.8 on 3 and 12297 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>fem_fit_ate</span>,</span>
+<span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
+<span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+ (1)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+0.627
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.017
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female_character
+</td>
+<td style="text-align:center;">
+0.398
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.019
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ALIVELiving Characters
+</td>
+<td style="text-align:center;">
+0.205
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.018
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pre_1970
+</td>
+<td style="text-align:center;">
+−0.109
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.019
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1.5px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1.5px">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+12301
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.053
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.053
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>lgbt_fit_ate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>align_value</span> <span class='op'>~</span> <span class='va'>lgbt_character</span> <span class='op'>+</span> <span class='va'>ALIVE</span> <span class='op'>+</span> <span class='va'>pre_1970</span>, data <span class='op'>=</span> <span class='va'>data2</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>lgbt_fit_ate</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = align_value ~ lgbt_character + ALIVE + pre_1970, 
+    data = data2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.5922 -0.9254 -0.5458  1.0746  1.4542 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             0.71299    0.01668  42.738  &lt; 2e-16 ***
+lgbt_character          0.66689    0.10478   6.365 2.02e-10 ***
+ALIVELiving Characters  0.21236    0.01826  11.628  &lt; 2e-16 ***
+pre_1970               -0.16717    0.01877  -8.907  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.8923 on 12885 degrees of freedom
+  (675 observations deleted due to missingness)
+Multiple R-squared:  0.02096,   Adjusted R-squared:  0.02073 
+F-statistic: 91.96 on 3 and 12885 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>lgbt_fit_ate</span>,</span>
+<span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
+<span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+ (1)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+0.713
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.017
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lgbt_character
+</td>
+<td style="text-align:center;">
+0.667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.105
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ALIVELiving Characters
+</td>
+<td style="text-align:center;">
+0.212
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.018
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pre_1970
+</td>
+<td style="text-align:center;">
+−0.167
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.019
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1.5px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1.5px">
+p = &lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+12889
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.021
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.021
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data2</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>lgbt_character</span>, y <span class='op'>=</span> <span class='va'>align_value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span> <span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"jitter"</span>, color <span class='op'>=</span> <span class='st'>"coral"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>x <span class='op'>=</span> <span class='st'>"LGBT+ Identifier"</span>,</span>
+<span>y <span class='op'>=</span> <span class='st'>"Alignment"</span>,</span>
+<span>title <span class='op'>=</span> <span class='st'>"Relationship Between LGBT+ Identity Status and Alignment"</span></span>
+<span><span class='op'>)</span>  <span class='op'>+</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"deeppink3"</span>, size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data2</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>female_character</span>, y <span class='op'>=</span> <span class='va'>align_value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span> <span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"jitter"</span>, color <span class='op'>=</span> <span class='st'>"darkslategray3"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>x <span class='op'>=</span> <span class='st'>"Gender Identifier"</span>,</span>
+<span>y <span class='op'>=</span> <span class='st'>"Alignment"</span>,</span>
+<span>title <span class='op'>=</span> <span class='st'>"Relationship Between Gender Identity and Moral Alignment"</span></span>
+<span><span class='op'>)</span>  <span class='op'>+</span> </span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"darkslateblue"</span>, size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
+</div>
 <h2 id="analysis-of-correlation">Analysis of Correlation</h2>
 <p>The reported correlation between female identity and moral alignment was 0.19. The reported correlation between LGBT+ identity and moral alignment was 0.06. In general, the correlation between being a minority character and moral alignment was 0.20. This shows that falling into any of the three identity categories was positively associated with being portrayed as a “good” character, although this correlation was much stronger for women and the overall “minority” character category than it was for LGBT+ characters specifically.</p>
 <h2 id="analysis-of-graphs">Analysis of Graphs</h2>
@@ -1672,7 +2057,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>For this project, I am planning on using Neil Paine’s data set on diversity and representation in Marvel comics to research the question: Are characters of marginalized identities (members of the LGBT+ community, women) more likely to be portrayed as villains in Marvel comics? Ideally, I would also like to manually add data about characters’ racial background as well (but I’m not sure how to edit a data frame yet so this is tbd).
 I hypothesize that overall, minority characters will be more likely to be portrayed as villains. Marvel Comics– and thus the characters from this data set— date back to 1939, a period when racism was still rampant and the LGBT+ community was significantly more ostracized. A natural offshoot of this racism and homophobia in society would be negative representation in the media, including in comic books. However, I hypothesize that if I examine LGBT+ characters, POC characters, and female characters independently, I will find that female characters are actually more likely to be portrayed in a positive light. Sexist social ideals in the early and mid-1900s generally painted women as innocent and pure, so it makes sense that they would be more closely identified with the “good side” in comic books. Additionally, most female characters in these early comic books were probably love interests for the main heroes, so again, they were probably on the side of the “good guys.”
 The explanatory variable that we are examining is the identity of the characters (either “white, cis, straight male” or “marginalized identity [LGBT+, female, POC]” → could potentially explore these identifiers independently as well). These groupings can easily be created based on identifiers in the data set: SEX (female/male) and GSM (gender or sexual minority). As I said above, new data would need to be manually entered to create a variable for race. The outcome variable in this study is whether characters are portrayed as a hero or villain (or neither). In this data set, each character is designated an alignment (ALIGN): “Good Character,” “Bad Character,” or “Neutral Character.” This will make it easy to identify the outcome of how they were portrayed. If my research should yield a high correlation between characters being of a marginalized background and being labeled “Bad Character” compared to white cis male characters, than my hypothesis will be proven correct. If the opposite is true and white, cis, straight male characters are more closely correlated with being a “Bad Character” than characters from marginalized backgrounds, my hypothesis will be disproven. Ideally, I would like to break down these comparisons so I can see the individual effect of characters being POC vs female vs LGBT+ on their portrayal as well.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
