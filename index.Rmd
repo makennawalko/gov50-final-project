@@ -133,7 +133,7 @@ ate_female <- data2 |>
 
 ate_female
 
-knitr::kable(ate_female)
+knitr::kable(ate_female, col.names = c("ATE of Being Female"))
 
 ate_lgbt <- data2 |>
   group_by(lgbt_character) |>
@@ -145,7 +145,7 @@ ate_lgbt <- data2 |>
 
 ate_lgbt
 
-knitr::kable(ate_lgbt)
+knitr::kable(ate_lgbt, col.names = c("ATE of Being LGBT+"))
 ```
 
 
