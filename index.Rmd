@@ -12,7 +12,19 @@ library(ggplot2)
 data2 <- read_csv("data/marvel-wikia-data.csv")
 data2
 ```
-  
+
+## Introduction
+
+As a child, I was a huge Marvel fan: I loved the adventures, the plot twists, and most of all, the fact that good always conquered evil. But as I grew up, I started to think more critically about who was being represented in these stories, and who exactly was being portrayed as “good” or “evil.” Superhero stories have a special place in our cultural imagination, and their depictions of who we should admire, who we should fear, and who has power are all reflected in the real world social and political landscape. For example, if children are repeatedly exposed to media that portrays members of the LGBT+ community as villains, this is likely to perpetuate homophobia and transphobia in society. So for this project, I wanted to investigate the following question: Are characters of historically marginalized identities (in this case, members of the LGBT+ community and women) more likely to be portrayed as villains in Marvel comics? 
+
+Going into this research, I hypothesized that LGBT+ characters would be more likely to be portrayed as villains. Marvel Comics– and thus the characters from this data set— date back to 1939, a period when the LGBT+ community was significantly more ostracized and seen as a danger to society. A natural offshoot of this homophobia would be negative representation in the media, including in comic books. However, I hypothesized the opposite would be true for female characters: Sexist social ideals in the early and mid-1900s generally painted women as innocent and pure, so it would make sense that they would be more closely identified with the “good side” in comic books. Additionally, most female characters in these early comic books were probably love interests for the main heroes, so again, I hypothesized that most of them would be on the side of the “good guys.” 
+
+## Data
+
+For this research, I used Neil Paine’s data set on diversity and representation in Marvel comics entitled “Comic Characters.” This data set encompassed characters from the 1940s through 2014, when the data was collected. Paine essentially categorized 16,376 Marvel characters according to name, alignment, whether their superhero identity was public, eye color, hair color, sex, whether they survive, whether they are a member of the LGBT community, how often they appear, and what year they were introduced. 
+
+Of these, the identifiers I was most interested in were their gender, identity as a member of the LGBT+ community, and alignment. For this study, gender and LGBT+ identity were the independent variables. I created a binary variable called female_characters to represent whether characters were female (1) or not (0), and an additional binary variable called lgbt_character to represent whether characters were LGBT+ (1) or not (0). Alignment on a scale of 0-2 (bad [0], neutral [1], or good [2]) was the dependent variable, represented by the variable align_value.  My research design was cross-sectional, in that I was essentially comparing the moral alignment of LGBT+ and female characters (these were my “treatment” groups”) to the moral alignment of straight/cis and male characters (my “control” groups) based on a single snapshot in time.  
+
 ```{r}
 data2 <- data2 |>
   mutate(lgbt_character = case_when(GSM == "Bisexual Characters" ~ 1,
@@ -68,39 +80,13 @@ lgbt_graph <- data2 |>
 
 lgbt_graph
 ```
-```{r}
-lgbt_graph_year <- data2 |>
-  filter(lgbt_character == 1) |>
-  group_by(Year) |>
-  summarize(n = n()) |>
-  ggplot(mapping = aes(x = Year, y = n)) +
-  geom_col(position = "dodge") +
-  labs(title = "LGBT+ Representation in Marvel Comic Books From the 1940s to 2014",
-       x = "Year",
-       y = "Number of LGBT+ Characters")
+My dependent variable in this case was moral alignment. I created the above tables to visualize how many characters fell into each alignment category. As the graphs show, female characters are most commonly portrayed as good characters, as was initially predicted. Men, in comparison, are most often portrayed as villains, but they are over-represented in every alignment category. For instance, although female characters are portrayed as good more often than bad and male characters are bad more often than good, there are nonetheless more good male characters than good female characters. 
 
-lgbt_graph_year
-```
+A similar trend can be observed across minority versus majority characters in general, probably because the minority category is mostly comprised of female characters and majority by male characters. Still, even when you combine LGBT+ characters and female characters, the collective group is significantly underrepresented compared to straight cis male characters. 
 
-```{r}
-female_graph_year <- data2 |>
-  filter(female_character == 1) |>
-  group_by(Year) |>
-  summarize(n = n()) |>
-  ggplot(mapping = aes(x = Year, y = n)) +
-  geom_col(position = "dodge") +
-  labs(title = "Female Representation in Marvel Comic Books From the 1930s to 2014",
-       x = "Year",
-       y = "Number of Female Characters")
+The final graph examines only the representation of the LGBT+ community, rather than in comparison to straight cis characters, because LGBT+ characters were so grossly underrepresented that when visualized directly alongside non-LGBT+ characters, they were essentially negligible. Within the LGBT+ community, characters across all identities most often appeared as good characters, which contradicted my initial prediction. This differential was so exacerbated that it implied most identities were either good characters, or simply did not appear at all. Out of over 16,000 characters, less than 10 of any identity within the LGBT+ community were "bad characters" and less than 20 were "neutral." Around 60 were "good." 
 
-female_graph_year
-```
-
-## Analysis of Graphs
-
-As the graphs show, female characters are most commonly portrayed as good characters, as was initially predicted. Men, in comparison, are most often portrayed as villains, but they are over-represented in every alignment category. For instance, although female characters are portrayed as good more often than bad and male characters are bad more often than good, there are nonetheless more good male characters than good female characters. A similar trend can be observed across minority versus majority characters in general, probably because the minority category is mostly comprised of female characters and majority by male characters. Still, even when you combine LGBT+ characters and female characters, the collective group is significantly underrepresented compared to straight cis male characters. The final graph examines only the representation of the LGBT+ community, rather than in comparison to straight cis characters, because LGBT+ characters were so grossly underrepresented that when visualized directly alongside non-LGBT+ characters, they were essentially negligible. Within the LGBT+ community, characters across all identities most often appeared as good characters, which contradicted my initial prediction. This differential was so exacerbated that it implied most identities were either good characters, or simply did not appear at all. Out of over 16,000 characters, less than 10 of any identity within the LGBT+ community were "bad characters" and less than 20 were "neutral." Around 60 were "good." This lack of representation for LGBT+ characters across the board reinforces the need for more LGBT+ characters across all alignments. 
-
-## Correlation
+## Results
 
 ```{r}
 
@@ -134,9 +120,7 @@ cor_table <- data.frame(
 knitr::kable((cor_table), col.names = c("Idenity", "Correlation With Moral Alignment"))
 ```
 
-## Analysis of Correlation
-
-The reported correlation between female identity and moral alignment was 0.19. The reported correlation between LGBT+ identity and moral alignment was 0.06. In general, the correlation between being a minority character and moral alignment was 0.20. This shows that falling into any of the three identity categories was positively associated with being portrayed as a "good" character, although this correlation was much stronger for women and the overall "minority" character category than it was for LGBT+ characters specifically.
+I wanted to look at the relationship between identity and alignment in a variety of ways. I started out by examining the correlation between female identity and alignment value, and found a correlation of 0.19. The reported correlation between LGBT+ identity and moral alignment was 0.06. In general, the correlation between being a minority character and moral alignment was 0.20. This shows that falling into any of the three identity categories was positively associated with being portrayed as a "good" character, although this correlation was much stronger for women and the overall "minority" character category than it was for LGBT+ characters specifically.
 
 ```{r}
 ate_female <- data2 |>
@@ -149,6 +133,8 @@ ate_female <- data2 |>
 
 ate_female
 
+knitr::kable(ate_female)
+
 ate_lgbt <- data2 |>
   group_by(lgbt_character) |>
   summarize(align_mean = mean(align_value)) |>
@@ -158,6 +144,8 @@ ate_lgbt <- data2 |>
   select(ATE)
 
 ate_lgbt
+
+knitr::kable(ate_lgbt)
 ```
 
 
@@ -192,16 +180,24 @@ modelsummary::modelsummary(lgbt_fit_ate,
                                           "pre_1970" = "Pre-1970"))
 ```
 
+Based on the above analysis, the average treatment effect of gender on alignment was determined to be 0.42. When I ran a regression, I found that the regression coefficient associated with being a female character was similar, approximately 0.40. These findings suggest that female characters are 40-42% more likely to be portrayed as "good characters" compared to their male counterparts. The p-value in this analysis was nearly zero, meaning data this significant in a world where there was actually no difference in alignment based on gender is extremely improbable. As a result, we can conclude that these findings have high statistical significance.  
+
+I found similar statistical significance for the relationship between being an LGBT+ character and moral alignment. The calculated average treatment effect of being LGBT+ was 0.72, and the regression coefficient associated with being an LGBT+ character was 0.67. This suggests that LGBT+ characters are 67-72% more likely to be portrayed as "good characters" compared to their straight, cis counterparts. This p-value was also very close to zero, suggesting this relationship is not simply a result of random chance.
+
+These findings are reflected in the scatterplots below. The first shows the relationship between gender and scaled alignment (0 being bad, 1 being neutral, and 2 being good). The second shows the relationship between LGBT+ identity on an identical scale. The line of best fit from each regression is mapped onto both scatterplots: the upward slope of the line indicates that there is a positive relationship for both “treatments.”  
+
+Although our findings have high statistical significance, I think we should be hesitant before confirming a causal relationship. There are many other aspects that could affect how a character is portrayed: for instance, in the case of female characters, whether or not they are the love interest, or in the case of LGBT+ characters, if they even occupy enough space in the narrative to be a villain. Their race and the age of the comic could also be confounding factors.
+
+
+
 ```{r}
 data2 |>
   ggplot(aes(x = lgbt_character, y = align_value)) +
 geom_point (position = "jitter", color = "coral") +
 labs(
-x = "LGBT+ Identifier",
-y = "Alignment",
-title = "Relationship Between LGBT+ Identity Status and Moral Alignment in Marvel Comics",
-subtitle = "With 0 Representing Straight, Cis Characters and 1 Representing LGBT+ Characters"
-)  +
+x = "LGBT+ Identity (0 Being Straight & Cis, 1 Being LGBT+)",
+y = "Alignment on a Scale of 0 (Evil) to 2 (Good)",
+title = "Relationship Between LGBT+ Identity and Moral Alignment in Marvel Comics")  +
 geom_smooth(method = "lm", se = FALSE, color = "deeppink3", size = 1.5)
 ```
 ```{r}
@@ -209,21 +205,46 @@ data2 |>
   ggplot(aes(x = female_character, y = align_value)) +
 geom_point (position = "jitter", color = "darkslategray3") +
 labs(
-x = "Gender Identifier",
-y = "Alignment",
-title = "Relationship Between Gender Identity and Moral Alignment in Marvel Comics",
-subtitle = "With 0 Representing Male Characters and 1 Representing Female Characters"
-)  + 
+x = "Gender Identity (0 Representing Male Characters and 1 Representing Female Characters)",
+y = "Alignment on a Scale of 0 (Evil) to 2 (Good)",
+title = "Relationship Between Gender Identity and Moral Alignment in Marvel Comics") +
 geom_smooth(method = "lm", se = FALSE, color = "darkslateblue", size = 1.5)
 ```
-##Analysis of ATE & Regression:
 
-Based on the above analysis, the average treatment effect of gender on alignment was determined to be 0.42. When I ran a regression, I found that the regression coefficient associated with being a female character was similar, approximately 0.40. These findings suggest that female characters are 40-42% more likely to be portrayed as "good characters" compared to their male counterparts. The p-value in this analysis was nearly zero, meaning data this significant in a world where there was actually no difference in alignment based on gender is extremely improbable. As a result, we can conclude that these findings have high statistical significance.  
+## Conclusion
 
-I found similar statistical significance for the relationship between being an LGBT+ character and moral alignment. The calculated average treatment effect of being LGBT+ was 0.72, and the regression coefficient associated with being an LGBT+ character was 0.67. This suggests that LGBT+ characters aee 67-72% more likely to be portrayed as "good characters" compared to their straight, cis counterparts. This p-value was also very close to zero, suggesting this relationship is not simply a result of random chance. 
+In general, my results suggested a positive treatment effect and correlation between belonging to an identity group that is underrepresented in comics and moral alignment. Women and LGBT+ characters were found to more often be portrayed as heroes rather than villains. This supports the hypothesis that female characters would be portrayed in a more positive light on average, but does not support the hypothesis that LGBT+ characters would more often be portrayed as villains. In hindsight, this makes sense: I believed homophobia would have led LGBT+ characters to be portrayed more negatively in Marvel’s early years, but it seems more likely that social stigma would have probably erased LGBT+ characters entirely. When I graphed the appearances of LGBT+ characters over time, this proved true: LGBT+ characters really only began to appear in significant numbers in the 2000s, when homophobia was less prevalent. 
 
-## Project Proposal
+```{r}
+lgbt_graph_year <- data2 |>
+  filter(lgbt_character == 1) |>
+  group_by(Year) |>
+  summarize(n = n()) |>
+  ggplot(mapping = aes(x = Year, y = n)) +
+  geom_col(position = "dodge") +
+  labs(title = "LGBT+ Representation in Marvel Comic Books From the 1940s to 2014",
+       x = "Year",
+       y = "Number of LGBT+ Characters")
 
-  For this project, I am planning on using Neil Paine’s data set on diversity and representation in Marvel comics to research the question: Are characters of marginalized identities (members of the LGBT+ community, women) more likely to be portrayed as villains in Marvel comics? Ideally, I would also like to manually add data about characters’ racial background as well (but I’m not sure how to edit a data frame yet so this is tbd). 
-  I hypothesize that overall, minority characters will be more likely to be portrayed as villains. Marvel Comics– and thus the characters from this data set— date back to 1939, a period when racism was still rampant and the LGBT+ community was significantly more ostracized. A natural offshoot of this racism and homophobia in society would be negative representation in the media, including in comic books. However, I hypothesize that if I examine LGBT+ characters, POC characters, and female characters independently, I will find that female characters are actually more likely to be portrayed in a positive light. Sexist social ideals in the early and mid-1900s generally painted women as innocent and pure, so it makes sense that they would be more closely identified with the “good side” in comic books. Additionally, most female characters in these early comic books were probably love interests for the main heroes, so again, they were probably on the side of the “good guys.” 
-  The explanatory variable that we are examining is the identity of the characters (either “white, cis, straight male” or “marginalized identity [LGBT+, female, POC]” → could potentially explore these identifiers independently as well). These groupings can easily be created based on identifiers in the data set: SEX (female/male) and GSM (gender or sexual minority). As I said above, new data would need to be manually entered to create a variable for race. The outcome variable in this study is whether characters are portrayed as a hero or villain (or neither). In this data set, each character is designated an alignment (ALIGN): “Good Character,” “Bad Character,” or “Neutral Character.” This will make it easy to identify the outcome of how they were portrayed. If my research should yield a high correlation between characters being of a marginalized background and being labeled “Bad Character” compared to white cis male characters, than my hypothesis will be proven correct. If the opposite is true and white, cis, straight male characters are more closely correlated with being a “Bad Character” than characters from marginalized backgrounds, my hypothesis will be disproven. Ideally, I would like to break down these comparisons so I can see the individual effect of characters being POC vs female vs LGBT+ on their portrayal as well. 
+lgbt_graph_year
+```
+
+```{r}
+female_graph_year <- data2 |>
+  filter(female_character == 1) |>
+  group_by(Year) |>
+  summarize(n = n()) |>
+  ggplot(mapping = aes(x = Year, y = n)) +
+  geom_col(position = "dodge") +
+  labs(title = "Female Representation in Marvel Comic Books From the 1930s to 2014",
+       x = "Year",
+       y = "Number of Female Characters")
+
+female_graph_year
+```
+
+Additionally, most Marvel characters in the LGBT+ community were gay or bisexual. For readers to become aware of this aspect of a character’s identity, it means the character was probably involved in a romantic plot or subplot, and such plots are usually reserved for heroes, rather than villains. I would be interested in doing further research into how romance affects the moral alignment of both LGBT+ characters and women, as many of the earliest Marvel women were probably just romantic interests for the heroes, automatically suggesting they were neutral or good characters. I would also be interested in looking at the way race affected whether characters were portrayed as heroes or villains. Unfortunately, this information was not available in this data set and I struggled to find it elsewhere. If I had more time, I would manually enter data regarding race and romantic status so that these potential confounding factors could be explored at more length.  
+
+Overall, I struggled with the fact that identity is not as explicit in the Marvel world as it is in our real world. Especially among villains, there are characters of various “alien” or “monster” types that can’t obviously be categorized as a certain gender identity. For this reason, I wasn’t really able to explore the effect of being non-binary on alignment— I assumed the vast majority of characters categorized this way were assigned this label because they were not actually human (thus, were much more likely to be villains). 
+
+In conclusion, I found it intriguing that female and LGBT+ characters were in general portrayed as the hero much more often than the villain. Although this seems like a good thing in terms of social repercussions, it’s important to note that across the board, there were more straight, cis men represented in every category. Perhaps the most striking conclusion from my research, even more than alignment, is how grossly underrepresented women and LGBT+ characters are in Marvel comics. And, as my research proved, even when they are represented they are almost always reduced to just one role, that of the hero. This lack of representation for LGBT+ and female characters across the board reinforces the need for more female and LGBT+ characters of all alignments: good, neutral, and bad.
