@@ -1558,7 +1558,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>                                    <span class='va'>GSM</span> <span class='op'>==</span> <span class='st'>"Transgender Characters"</span> <span class='op'>~</span> <span class='fl'>1</span>,</span>
 <span>                                    <span class='cn'>TRUE</span> <span class='op'>~</span> <span class='fl'>0</span><span class='op'>)</span>,</span>
 <span>         female_character <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>SEX</span> <span class='op'>==</span> <span class='st'>"Female Characters"</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>,</span>
-<span>        minority_character <span class='op'>=</span> <span class='op'>(</span><span class='va'>female_character</span> <span class='op'>==</span> <span class='fl'>1</span> <span class='op'>|</span> <span class='va'>lgbt_character</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>         minority_character <span class='op'>=</span> <span class='op'>(</span><span class='va'>female_character</span> <span class='op'>==</span> <span class='fl'>1</span> <span class='op'>|</span> <span class='va'>lgbt_character</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>minority_graph</span> <span class='op'>&lt;-</span> <span class='va'>data2</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>ALIGN</span>, <span class='va'>minority_character</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
@@ -1587,7 +1587,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>       x <span class='op'>=</span> <span class='st'>"Alignment"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Number of Characters"</span>,</span>
 <span>       fill <span class='op'>=</span> <span class='st'>"Minority Affiliation"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span><span class='op'>(</span>guide <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guide_axis.html'>guide_axis</a></span><span class='op'>(</span>n.dodge<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span><span class='op'>(</span>guide <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guide_axis.html'>guide_axis</a></span><span class='op'>(</span>n.dodge<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>female_graph</span></span></code></pre>
 </div>
@@ -1605,7 +1605,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>       x <span class='op'>=</span> <span class='st'>"Alignment"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Number of Characters"</span>,</span>
 <span>       fill <span class='op'>=</span> <span class='st'>"LGBT+ Identity"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span><span class='op'>(</span>guide <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guide_axis.html'>guide_axis</a></span><span class='op'>(</span>n.dodge<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span><span class='op'>(</span>guide <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guide_axis.html'>guide_axis</a></span><span class='op'>(</span>n.dodge<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>lgbt_graph</span></span></code></pre>
 </div>
@@ -1647,8 +1647,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>cor_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
 <span>  Variable1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Minority Characters (General)"</span>, <span class='st'>"Female Characters"</span>, <span class='st'>"LGBT+ Characters"</span><span class='op'>)</span>,</span>
-<span>  Correlation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>cor_minority</span>, <span class='va'>cor_female</span>, <span class='va'>cor_lgbt</span><span class='op'>)</span> </span>
-<span><span class='op'>)</span></span>
+<span>  Correlation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>cor_minority</span>, <span class='va'>cor_female</span>, <span class='va'>cor_lgbt</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>cor_table</span><span class='op'>)</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Idenity"</span>, <span class='st'>"Correlation With Moral Alignment"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
@@ -1741,37 +1740,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data2</span> <span class='op'>&lt;-</span> <span class='va'>data2</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span></span>
-<span>    pre_1970 <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>Year</span> <span class='op'>&lt;=</span> <span class='fl'>1970</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span></span>
-<span>  <span class='op'>)</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>pre_1970 <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>Year</span> <span class='op'>&lt;=</span> <span class='fl'>1970</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>fem_fit_ate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>align_value</span> <span class='op'>~</span> <span class='va'>female_character</span> <span class='op'>+</span> <span class='va'>ALIVE</span> <span class='op'>+</span> <span class='va'>pre_1970</span>, data <span class='op'>=</span> <span class='va'>data2</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fem_fit_ate</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>
-Call:
-lm(formula = align_value ~ female_character + ALIVE + pre_1970, 
-    data = data2)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.2299 -0.8323 -0.2299  0.8794  1.4823 
-
-Coefficients:
-                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)             0.62700    0.01733  36.181  &lt; 2e-16 ***
-female_character        0.39765    0.01879  21.161  &lt; 2e-16 ***
-ALIVELiving Characters  0.20525    0.01836  11.179  &lt; 2e-16 ***
-pre_1970               -0.10931    0.01915  -5.708 1.17e-08 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 0.8803 on 12297 degrees of freedom
-  (1263 observations deleted due to missingness)
-Multiple R-squared:  0.05308,   Adjusted R-squared:  0.05285 
-F-statistic: 229.8 on 3 and 12297 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>fem_fit_ate</span>,</span>
+<span></span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>fem_fit_ate</span>,</span>
 <span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
 <span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
 <span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span>,</span>
@@ -1908,32 +1881,8 @@ R2 Adj.
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>lgbt_fit_ate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>align_value</span> <span class='op'>~</span> <span class='va'>lgbt_character</span> <span class='op'>+</span> <span class='va'>ALIVE</span> <span class='op'>+</span> <span class='va'>pre_1970</span>, data <span class='op'>=</span> <span class='va'>data2</span><span class='op'>)</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>lgbt_fit_ate</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>
-Call:
-lm(formula = align_value ~ lgbt_character + ALIVE + pre_1970, 
-    data = data2)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.5922 -0.9254 -0.5458  1.0746  1.4542 
-
-Coefficients:
-                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)             0.71299    0.01668  42.738  &lt; 2e-16 ***
-lgbt_character          0.66689    0.10478   6.365 2.02e-10 ***
-ALIVELiving Characters  0.21236    0.01826  11.628  &lt; 2e-16 ***
-pre_1970               -0.16717    0.01877  -8.907  &lt; 2e-16 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 0.8923 on 12885 degrees of freedom
-  (675 observations deleted due to missingness)
-Multiple R-squared:  0.02096,   Adjusted R-squared:  0.02073 
-F-statistic: 91.96 on 3 and 12885 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>lgbt_fit_ate</span>,</span>
+<span></span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>lgbt_fit_ate</span>,</span>
 <span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
 <span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
 <span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span>,</span>
@@ -2075,12 +2024,11 @@ R2 Adj.
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data2</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>lgbt_character</span>, y <span class='op'>=</span> <span class='va'>align_value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span> <span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"jitter"</span>, color <span class='op'>=</span> <span class='st'>"coral"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>x <span class='op'>=</span> <span class='st'>"LGBT+ Identity (0 Being Straight &amp; Cis, 1 Being LGBT+)"</span>,</span>
-<span>y <span class='op'>=</span> <span class='st'>"Alignment on a Scale of 0 (Evil) to 2 (Good)"</span>,</span>
-<span>title <span class='op'>=</span> <span class='st'>"Relationship Between LGBT+ Identity and Moral Alignment in Marvel Comics"</span><span class='op'>)</span>  <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"deeppink3"</span>, size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span> <span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"jitter"</span>, color <span class='op'>=</span> <span class='st'>"coral"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"LGBT+ Identity (0 Being Straight &amp; Cis, 1 Being LGBT+)"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Alignment on a Scale of 0 (Evil) to 2 (Good)"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"Relationship Between LGBT+ Identity and Moral Alignment in Marvel Comics"</span><span class='op'>)</span>  <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"deeppink3"</span>, size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
 </div>
@@ -2088,12 +2036,11 @@ R2 Adj.
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data2</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>female_character</span>, y <span class='op'>=</span> <span class='va'>align_value</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span> <span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"jitter"</span>, color <span class='op'>=</span> <span class='st'>"darkslategray3"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>x <span class='op'>=</span> <span class='st'>"Gender Identity (0 Representing Male Characters and 1 Representing Female Characters)"</span>,</span>
-<span>y <span class='op'>=</span> <span class='st'>"Alignment on a Scale of 0 (Evil) to 2 (Good)"</span>,</span>
-<span>title <span class='op'>=</span> <span class='st'>"Relationship Between Gender Identity and Moral Alignment in Marvel Comics"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"darkslateblue"</span>, size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span> <span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"jitter"</span>, color <span class='op'>=</span> <span class='st'>"darkslategray3"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Gender Identity (0 Representing Male Characters and 1 Representing Female Characters)"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Alignment on a Scale of 0 (Evil) to 2 (Good)"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"Relationship Between Gender Identity and Moral Alignment in Marvel Comics"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"darkslateblue"</span>, size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
 </div>
@@ -2106,7 +2053,7 @@ R2 Adj.
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Year</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Year</span>, y <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"purple3"</span>, position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"LGBT+ Representation in Marvel Comic Books From the 1940s to 2014"</span>,</span>
 <span>       x <span class='op'>=</span> <span class='st'>"Year"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Number of LGBT+ Characters"</span><span class='op'>)</span></span>
@@ -2122,7 +2069,7 @@ R2 Adj.
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Year</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Year</span>, y <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"pink2"</span>, position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Female Representation in Marvel Comic Books From the 1930s to 2014"</span>,</span>
 <span>       x <span class='op'>=</span> <span class='st'>"Year"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Number of Female Characters"</span><span class='op'>)</span></span>
@@ -2134,7 +2081,7 @@ R2 Adj.
 <p>Additionally, most Marvel characters in the LGBT+ community were gay or bisexual. For readers to become aware of this aspect of a character’s identity, it means the character was probably involved in a romantic plot or subplot, and such plots are usually reserved for heroes, rather than villains. I would be interested in doing further research into how romance affects the moral alignment of both LGBT+ characters and women, as many of the earliest Marvel women were probably just romantic interests for the heroes, automatically suggesting they were neutral or good characters. I would also be interested in looking at the way race affected whether characters were portrayed as heroes or villains. Unfortunately, this information was not available in this data set and I struggled to find it elsewhere. If I had more time, I would manually enter data regarding race and romantic status so that these potential confounding factors could be explored at more length.</p>
 <p>Overall, I struggled with the fact that identity is not as explicit in the Marvel world as it is in our real world. Especially among villains, there are characters of various “alien” or “monster” types that can’t obviously be categorized as a certain gender identity. For this reason, I wasn’t really able to explore the effect of being non-binary on alignment— I assumed the vast majority of characters categorized this way were assigned this label because they were not actually human (thus, were much more likely to be villains).</p>
 <p>In conclusion, I found it intriguing that female and LGBT+ characters were in general portrayed as the hero much more often than the villain. Although this seems like a good thing in terms of social repercussions, it’s important to note that across the board, there were more straight, cis men represented in every category. Perhaps the most striking conclusion from my research, even more than alignment, is how grossly underrepresented women and LGBT+ characters are in Marvel comics. And, as my research proved, even when they are represented they are almost always reduced to just one role, that of the hero. This lack of representation for LGBT+ and female characters across the board reinforces the need for more female and LGBT+ characters of all alignments: good, neutral, and bad.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

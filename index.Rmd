@@ -33,7 +33,7 @@ data2 <- data2 |>
                                     GSM == "Transgender Characters" ~ 1,
                                     TRUE ~ 0),
          female_character = if_else(SEX == "Female Characters", 1, 0),
-        minority_character = (female_character == 1 | lgbt_character == 1))
+         minority_character = (female_character == 1 | lgbt_character == 1))
 
 minority_graph <- data2 |>
   group_by(ALIGN, minority_character) |>
@@ -60,7 +60,7 @@ female_graph <- data2 |>
        x = "Alignment",
        y = "Number of Characters",
        fill = "Minority Affiliation") +
-    scale_x_discrete(guide = guide_axis(n.dodge=2))
+  scale_x_discrete(guide = guide_axis(n.dodge=2))
 
 female_graph
 ```
@@ -76,7 +76,7 @@ lgbt_graph <- data2 |>
        x = "Alignment",
        y = "Number of Characters",
        fill = "LGBT+ Identity") +
-    scale_x_discrete(guide = guide_axis(n.dodge=2))
+  scale_x_discrete(guide = guide_axis(n.dodge=2))
 
 lgbt_graph
 ```
@@ -114,8 +114,7 @@ cor_lgbt
 ```{r}
 cor_table <- data.frame(
   Variable1 = c("Minority Characters (General)", "Female Characters", "LGBT+ Characters"),
-  Correlation = c(cor_minority, cor_female, cor_lgbt) 
-)
+  Correlation = c(cor_minority, cor_female, cor_lgbt))
 
 knitr::kable((cor_table), col.names = c("Idenity", "Correlation With Moral Alignment"))
 ```
@@ -151,12 +150,9 @@ knitr::kable(ate_lgbt, col.names = c("ATE of Being LGBT+"))
 
 ```{r}
 data2 <- data2 |>
-  mutate(
-    pre_1970 = if_else(Year <= 1970, 1, 0)
-  )
+  mutate(pre_1970 = if_else(Year <= 1970, 1, 0))
 
 fem_fit_ate <- lm(align_value ~ female_character + ALIVE + pre_1970, data = data2)
-summary(fem_fit_ate)
 
 modelsummary::modelsummary(fem_fit_ate,
                            statistic = c("s.e. = {std.error}",
@@ -169,7 +165,6 @@ modelsummary::modelsummary(fem_fit_ate,
 
 ```{r}
 lgbt_fit_ate <- lm(align_value ~ lgbt_character + ALIVE + pre_1970, data = data2)
-summary(lgbt_fit_ate)
 
 modelsummary::modelsummary(lgbt_fit_ate,
                            statistic = c("s.e. = {std.error}",
@@ -193,22 +188,20 @@ Although our findings have high statistical significance, I think we should be h
 ```{r}
 data2 |>
   ggplot(aes(x = lgbt_character, y = align_value)) +
-geom_point (position = "jitter", color = "coral") +
-labs(
-x = "LGBT+ Identity (0 Being Straight & Cis, 1 Being LGBT+)",
-y = "Alignment on a Scale of 0 (Evil) to 2 (Good)",
-title = "Relationship Between LGBT+ Identity and Moral Alignment in Marvel Comics")  +
-geom_smooth(method = "lm", se = FALSE, color = "deeppink3", size = 1.5)
+  geom_point (position = "jitter", color = "coral") +
+  labs(x = "LGBT+ Identity (0 Being Straight & Cis, 1 Being LGBT+)",
+       y = "Alignment on a Scale of 0 (Evil) to 2 (Good)",
+       title = "Relationship Between LGBT+ Identity and Moral Alignment in Marvel Comics")  +
+  geom_smooth(method = "lm", se = FALSE, color = "deeppink3", size = 1.5)
 ```
 ```{r}
 data2 |>
   ggplot(aes(x = female_character, y = align_value)) +
-geom_point (position = "jitter", color = "darkslategray3") +
-labs(
-x = "Gender Identity (0 Representing Male Characters and 1 Representing Female Characters)",
-y = "Alignment on a Scale of 0 (Evil) to 2 (Good)",
-title = "Relationship Between Gender Identity and Moral Alignment in Marvel Comics") +
-geom_smooth(method = "lm", se = FALSE, color = "darkslateblue", size = 1.5)
+  geom_point (position = "jitter", color = "darkslategray3") +
+  labs(x = "Gender Identity (0 Representing Male Characters and 1 Representing Female Characters)",
+       y = "Alignment on a Scale of 0 (Evil) to 2 (Good)",
+       title = "Relationship Between Gender Identity and Moral Alignment in Marvel Comics") +
+  geom_smooth(method = "lm", se = FALSE, color = "darkslateblue", size = 1.5)
 ```
 
 ## Conclusion
@@ -221,7 +214,7 @@ lgbt_graph_year <- data2 |>
   group_by(Year) |>
   summarize(n = n()) |>
   ggplot(mapping = aes(x = Year, y = n)) +
-  geom_col(position = "dodge") +
+  geom_col(fill = "purple3", position = "dodge") +
   labs(title = "LGBT+ Representation in Marvel Comic Books From the 1940s to 2014",
        x = "Year",
        y = "Number of LGBT+ Characters")
@@ -235,7 +228,7 @@ female_graph_year <- data2 |>
   group_by(Year) |>
   summarize(n = n()) |>
   ggplot(mapping = aes(x = Year, y = n)) +
-  geom_col(position = "dodge") +
+  geom_col(fill = "pink2", position = "dodge") +
   labs(title = "Female Representation in Marvel Comic Books From the 1930s to 2014",
        x = "Year",
        y = "Number of Female Characters")
