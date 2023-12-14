@@ -158,7 +158,7 @@ modelsummary::modelsummary(fem_fit_ate,
                            statistic = c("s.e. = {std.error}",
                                          "p = {p.value}"),
                            gof_map = c("nobs", "r.squared", "adj.r.squared"),
-                            coef_rename = c("ALIVELiving Characters" = "Living Characters",
+                           coef_rename = c("ALIVELiving Characters" = "Living Characters",
                                           "female_character" = "Female Characters",
                                           "pre_1970" = "Pre-1970"))
 ```
