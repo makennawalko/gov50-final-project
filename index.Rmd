@@ -1,7 +1,6 @@
 ---
-title: "Gov 50 Final Project"
+title: "The Impact of Marginalized Identiy on Character Moral Alignment in Marvel Comics (1939-2014)"
 author: Makenna Walko
-description: "Makenna's brilliant, mind-boggling, innovative, A+ worthy final project !!"
 output:
   distill::distill_article:
     self_contained: false
@@ -117,16 +116,10 @@ data2 <- data2 |>
 cor_minority <- cor(data2$minority_character, data2$align_value,
       use = "pairwise")
 
-cor_minority
-
 cor_female <- cor(data2$female_character, data2$align_value,
       use = "pairwise")
 
-cor_female
-
 cor_lgbt <- cor(data2$lgbt_character, data2$align_value)
-
-cor_lgbt
 ```
 
 ```{r}
@@ -134,10 +127,10 @@ cor_table <- data.frame(
   Variable1 = c("Minority Characters (General)", "Female Characters", "LGBT+ Characters"),
   Correlation = c(cor_minority, cor_female, cor_lgbt))
 
-knitr::kable((cor_table), col.names = c("Idenity", "Correlation With Moral Alignment"))
+knitr::kable((cor_table), col.names = c("Idenity", "Correlation With Moral Alignment"), digits = 2)
 ```
 
-I wanted to look at the relationship between identity and alignment in a variety of ways. I started out by examining the correlation between female identity and alignment value, and found a correlation of 0.19. The reported correlation between LGBT+ identity and moral alignment was 0.06. In general, the correlation between being a minority character and moral alignment was 0.20. This shows that falling into any of the three identity categories was positively associated with being portrayed as a "good" character, although this correlation was much stronger for women and the overall "minority" character category than it was for LGBT+ characters specifically.
+I wanted to look at the relationship between identity and alignment in a variety of ways. I started out by examining the correlation between female identity and alignment value, and found a correlation of 0.20. The reported correlation between LGBT+ identity and moral alignment was 0.06. In general, the correlation between being a minority character and moral alignment was 0.21. This shows that falling into any of the three identity categories was positively associated with being portrayed as a "good" character, although this correlation was much stronger for women and the overall "minority" character category than it was for LGBT+ characters specifically.
 
 ```{r}
 ate_female <- data2 |>
@@ -148,9 +141,7 @@ ate_female <- data2 |>
   mutate(ATE = `1` - `0`) |>
   select(ATE)
 
-ate_female
-
-knitr::kable(ate_female, col.names = c("ATE of Being Female"))
+knitr::kable(ate_female, col.names = c("ATE of Being Female"), digits = 2)
 
 ate_lgbt <- data2 |>
   group_by(lgbt_character) |>
@@ -160,9 +151,7 @@ ate_lgbt <- data2 |>
   mutate(ATE = `1` - `0`) |>
   select(ATE)
 
-ate_lgbt
-
-knitr::kable(ate_lgbt, col.names = c("ATE of Being LGBT+"))
+knitr::kable(ate_lgbt, col.names = c("ATE of Being LGBT+"), digits = 2)
 ```
 
 
@@ -188,7 +177,7 @@ modelsummary::modelsummary(lgbt_fit_ate,
                            statistic = c("s.e. = {std.error}",
                                          "p = {p.value}"),
                            gof_map = c("nobs", "r.squared", "adj.r.squared"),
-                          coef_rename = c("ALIVELiving Characters" = "Living Characters",
+                           coef_rename = c("ALIVELiving Characters" = "Living Characters",
                                           "lgbt_character" = "LGBT+ Characters",
                                           "pre_1970" = "Pre-1970"))
 ```
